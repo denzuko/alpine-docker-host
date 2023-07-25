@@ -9,4 +9,6 @@ apk update && apk upgrade --available
 apk add \
   busybox-extras \
   docker docker-compose \
-  sudo bash curl
+  sudo bash curl ca-certificates \
+  jo jq fzf yq
+  
