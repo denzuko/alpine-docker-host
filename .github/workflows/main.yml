@@ -17,6 +17,8 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: docker/setup-qemu-action@v2.2.0
+        with:
+          platforms: x86_64
       - uses: hashicorp/setup-packer@v2.0.0
       - uses: open-policy-agent/setup-opa@v2
       
