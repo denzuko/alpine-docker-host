@@ -15,27 +15,26 @@ jobs:
     permissions:
       contents: read
       pull-requests: write
+      discussions: write
     name: Run Packer
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-        
-      - name: Setup HashiCorp Packer
-        uses: hashicorp/setup-packer@v2.0.0
-        
+      - uses: actions/checkout@v3
+      - uses: hashicorp/setup-packer@v2.0.0
+      - uses: geertvdc/setup-hub@v1.0.0
+
       - name: Run build script
         run: "./build.sh"
-        
+
       #- name: Cache
       #  uses: actions/cache@v1.2.1
       #  with:
       #    path: $HOME/.config/packer
-        
+    
       - name: Create a Release
-        uses: elgohr/Github-Release-Action@main
         env:
-          GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
-          GITHUB_USER: 'denzuko'
-          GITHUB_REPOSITORY: 'alpine-docker-host'
-        with:
-          title: ${{ github.sha }}
+          GITHUB_USER: ${{ secrets.GITHUB_USER }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ vars.REPOSITORY_VAR }}
+          run: |
+            hub release create -m "${{ github.sha }}" "$(date +%Y%m%d%H%M%S)"
+
