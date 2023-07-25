@@ -1,0 +1,28 @@
+name: Release OVF
+on:
+  workflow_dispatch:
+  push: "master"
+
+env:
+  PRODUCT_VERSION: "latest-rc"
+
+jobs:
+  packer:
+    runs-on: ubuntu-latest
+    name: Run Packer
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        
+      - name: Setup HashiCorp Packer
+        uses: hashicorp/setup-packer@v2.0.0
+        
+      - name: Run build script
+        run: "./build.sh"
+        
+      - name: Create a Release
+        uses: elgohr/Github-Release-Action@v4
+        env:
+          GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
+        with:
+          title: Release Candidate 
