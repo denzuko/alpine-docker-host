@@ -1,14 +1,11 @@
+---
 name: Release OVF
 on:
-  workflow_dispatch:
-  push: 
+  workflow_dispatch: null
+  push:
     branches:
-      - 'master'
-      - 'releases/**'
-
-env:
-  PRODUCT_VERSION: "latest-rc"
-
+      - master
+      - releases/**
 jobs:
   packer:
     runs-on: ubuntu-latest
@@ -21,15 +18,8 @@ jobs:
       - uses: actions/checkout@v3
       - uses: hashicorp/setup-packer@v2.0.0
       - uses: geertvdc/setup-hub@v1.0.0
-
       - name: Run build script
-        run: "./build.sh"
-
-      #- name: Cache
-      #  uses: actions/cache@v1.2.1
-      #  with:
-      #    path: $HOME/.config/packer
-    
+        run: ./build.sh
       - name: Create a Release
         env:
           GITHUB_USER: ${{ secrets.GITHUB_USER }}
@@ -37,4 +27,4 @@ jobs:
           GITHUB_REPOSITORY: ${{ vars.REPOSITORY_VAR }}
           run: |
             hub release create -m "${{ github.sha }}" "$(date +%Y%m%d%H%M%S)"
-
+...
