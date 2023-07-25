@@ -12,6 +12,9 @@ env:
 jobs:
   packer:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
     name: Run Packer
     steps:
       - name: Checkout
@@ -29,6 +32,8 @@ jobs:
       #    path: $HOME/.config/packer
         
       - name: Create a Release
-        uses: elgohr/Github-Release-Action@v4
+        uses: elgohr/Github-Release-Action@main
+        env:
+          GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
         with:
-          title: Release Candidate 
+          title: ${{ github.sha }}
