@@ -17,14 +17,14 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: hashicorp/setup-packer@v2.0.0
-      - uses: geertvdc/setup-hub@v1.0.0
       - name: Run build script
         run: ./build.sh
       - name: Create a Release
+        uses: elgohr/Github-Hub-Action@master
         env:
           GITHUB_USER: ${{ secrets.GITHUB_USER }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ vars.REPOSITORY_VAR }}
-        run: |
-          hub release create -m "${{ github.sha }}" "$(date +%Y%m%d%H%M%S)"
+        with:
+          args: release create -m "${{ github.sha }}" "$(date +%Y%m%d%H%M%S)"
 ...
