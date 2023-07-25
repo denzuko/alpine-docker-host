@@ -20,11 +20,11 @@ jobs:
       - uses: geertvdc/setup-hub@v1.0.0
       - name: Run build script
         run: ./build.sh
-      - name: Create a Release
-        env:
-          GITHUB_USER: ${{ secrets.GITHUB_USER }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITHUB_REPOSITORY: ${{ vars.REPOSITORY_VAR }}
-        run: |
-          hub release create -m "${{ github.sha }}" "$(date +%Y%m%d%H%M%S)"
+      #- name: Create a Release
+      #  env:
+      #    GITHUB_USER: ${{ secrets.GITHUB_USER }}
+      #    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #    GITHUB_REPOSITORY: ${{ vars.REPOSITORY_VAR }}
+      #  run: |
+      #    hub release create -m "${{ github.sha }}" "$(date +%Y%m%d%H%M%S)"
 ...
