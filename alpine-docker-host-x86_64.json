@@ -60,7 +60,7 @@
         "umount /mnt<enter>",
         "reboot<enter>"
       ],
-      "format": "vmdk",
+      "format": "qcow2",
       "accelerator": "{{user `accelerator`}}",
       "net_device": "virtio-net",
       "disk_interface": "virtio-scsi",
