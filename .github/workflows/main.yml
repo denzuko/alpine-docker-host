@@ -35,5 +35,7 @@ jobs:
         uses: elgohr/Github-Release-Action@main
         env:
           GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
+          GITHUB_USER: 'denzuko'
+          GITHUB_REPOSITORY: 'alpine-docker-host'
         with:
           title: ${{ github.sha }}
