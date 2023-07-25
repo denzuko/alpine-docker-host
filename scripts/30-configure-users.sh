@@ -12,3 +12,5 @@ adduser alpine wheel
 
 echo "Defaults exempt_group=wheel" > /etc/sudoers
 echo "%wheel ALL=NOPASSWD:ALL" >> /etc/sudoers
+
+sudo -u alpine ssh-keygen -t rsa -b 4098 -f /home/alpine/.ssh/id_rsa -N'' -q
