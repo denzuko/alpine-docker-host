@@ -1,7 +1,10 @@
 name: Release OVF
 on:
   workflow_dispatch:
-  push: "master"
+  push: 
+    branches:
+      - 'master'
+      - 'releases/**'
 
 env:
   PRODUCT_VERSION: "latest-rc"
