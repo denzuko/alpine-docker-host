@@ -24,12 +24,11 @@ jobs:
         id: check_policies
         uses: andstor/file-existence-action@v1
         with:
-          files: "policy/settings.rego"
+          files: "policy/packer.rego"
 
       - name: Validate conf with OPA
         if: steps.check_files.outputs.files_exists == 'true'
-        run: |
-          cat *.json | opa test policy/main.rego
+        run: opa test -v policy/packer.rego alpine-docker-host-x86_64.json 
 
       - name: Run build script
         run: ./build.sh
