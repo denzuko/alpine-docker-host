@@ -1,6 +1,6 @@
 # alpine-docker-host
 
-Packer script to build a minimal Alpine Linux based Docker Host OS image (vmdk/OVA) using QEMU.
+Packer script to build a minimal Alpine Linux based Docker Host OS image (qcow2/OVA) using QEMU.
 
 ### Building
 
