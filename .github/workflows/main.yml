@@ -1,18 +1,21 @@
 ---
 name: Release OVF
+
+permissions:
+  contents: write
+  pull-requests: write
+  discussions: write
+  
 on:
   workflow_dispatch: null
   push:
     branches:
       - master
       - releases/**
+
 jobs:
   packer:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      pull-requests: write
-      discussions: write
     name: Run Packer
     steps:
       - uses: actions/checkout@v3
